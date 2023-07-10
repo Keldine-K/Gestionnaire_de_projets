@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projets{% endblock %}
+
+{% block body %}
+    <h1>Liste des projets</h1>
+
+    {% if projets is empty %}
+        <p>Aucun projet trouvé.</p>
+    {% else %}
+        <ul>
+            {% for projet in projets %}
+                <li>
+                    {{ projet.nom }}
+                    <a href="{{ path('projet_delete', { 'id': projet.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">Supprimer</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <a href="{{ path('projet_create') }}">Créer un projet</a>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se Connecter -Gestionnaire de Projet{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .cadre-todo {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .note-cadre {
+            position: relative;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .note-text-cadre-email,
+        .note-text-cadre-password {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .label-email,
+        .label-password {
+            position: absolute;
+            top: -23px;
+            left: -15px;
+        }
+
+        .note-text {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<!-- Formulaire de connexion -->
+
+    <div class="cadre-todo">
+        <div class="note-cadre">
+            <form action="{{ path('app_login') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <div class="note-text-cadre-email">
+                    <label for="email" class="label-email">Email:</label>
+                    <input type="email" value="{{ last_username }}" name="email" class="note-text" autocomplete="email" required autofocus>
+                </div>
+
+                <div class="note-text-cadre-password">
+                    <label for="password" class="label-password">Mot de passe:</label>
+                    <input type="password" name="password" class="note-text" autocomplete="current-password" required>
+                </div>
+
+                <button type="submit" class="btn">Se connecter </button>
+
+                <a href="{{ path('form_register') }}" class="create-account">
+                    <p>Créer un compte</p>
+                </a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

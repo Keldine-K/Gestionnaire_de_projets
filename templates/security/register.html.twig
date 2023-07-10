@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'insicre - Gestionaiire de Projet{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .cadre-todo {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .note-cadre {
+            position: relative;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .note-text-cadre-name,
+        .note-text-cadre-email,
+        .note-text-cadre-password,
+        .note-text-cadre-password-confirm {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .label-name,
+        .label-email,
+        .label-password,
+        .label-password-confirm {
+            position: absolute;
+            top: -24px;
+            left: -10px;
+        }
+
+        .note-text {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .connexion {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="cadre-todo">
+        <div class="note-cadre">
+            <form action="{{ path('app_register') }}" method="post">
+                {% if error is defined %}
+                    <p style="position: absolute;left: 150px; top: -121px;color: red;">{{ error }}</p>
+                {% endif %}
+
+                <div class="note-text-cadre-name">
+                    <label for="name" class="label-name">Nom:</label>
+                    <input type="text" name="nom" value="" class="note-text" required>
+                </div>
+
+                <div class="note-text-cadre-email">
+                    <label for="email" class="label-email">Email:</label>
+                    <input type="text" name="email" value="" class="note-text" required>
+                </div>
+
+                <div class="note-text-cadre-password">
+                    <label for="password" class="label-password">Mot de passe:</label>
+                    <input type="password" name="password" value="" class="note-text" required>
+                </div>
+
+                <div class="note-text-cadre-password-confirm">
+                    <label for="password_confirm" class="label-password-confirm">Confirmation de mot de passe:</label>
+                    <input type="password" name="password_confirm" value="" class="note-text" required>
+                    </div>
+
+                    <button type="submit" class="btn">Enregistrer</button>
+
+                    <a href="{{ path('app_login') }}" class="connexion">
+                        <p>Se connecter</p>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
